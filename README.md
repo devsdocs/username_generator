@@ -1,4 +1,4 @@
-# username_generator
+# simple_username_generator
 
 A lightweight, zero-dependency Dart package that generates random usernames by combining words from five categories — **adjectives**, **verbs**, **adverbs**, **nouns**, and **suffixes** — with a numeric suffix.
 
@@ -15,7 +15,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  username_generator: ^1.4.0
+  simple_username_generator: ^1.4.0
 ```
 
 Then run:
