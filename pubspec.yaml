@@ -1,0 +1,23 @@
+name: username_generator
+description: >-
+  A lightweight, zero-dependency Dart package that generates random usernames
+  by combining adjectives, verbs, adverbs, nouns, and suffixes with a numeric
+  suffix. Supports 8 styles, 4 casing formats, batch generation, and seeded
+  reproducibility.
+version: 1.4.0
+repository: https://github.com/devsdocs/username_generator
+homepage: https://github.com/devsdocs/username_generator
+issue_tracker: https://github.com/devsdocs/username_generator/issues
+
+topics:
+  - username
+  - generator
+  - random
+  - utility
+
+environment:
+  sdk: ^3.11.4
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.6
