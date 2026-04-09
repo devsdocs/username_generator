@@ -3,7 +3,7 @@
 A lightweight, zero-dependency Dart package that generates random usernames by combining words from seven categories — **adjectives**, **verbs**, **adverbs**, **nouns**, **suffixes**, **prefixes**, and **titles** — with a numeric suffix.
 
 - **2,700+ deduplicated words** across 7 categories
-- **12 username styles** (e.g. `AdjectiveNoun`, `NounSuffix`, `PrefixNoun`, `TitleNoun`)
+- **19 username styles** (e.g. `AdjectiveNoun`, `NounSuffix`, `PrefixNoun`, `TitleNoun`)
 - **4 casing formats** (PascalCase, lowercase, snake_case, kebab-case)
 - **Batch generation** with uniqueness guarantee
 - **Seeded output** for reproducibility
@@ -15,7 +15,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  simple_username_generator: ^1.5.0
+  simple_username_generator: ^1.6.0
 ```
 
 Then run:
@@ -85,6 +85,13 @@ void main() {
 | `prefixAdjectiveNoun` | Prefix + Adjective + Noun | `ArchDarkTiger7` |
 | `titleNoun` | Title + Noun | `AgentWolf99` |
 | `titleAdjectiveNoun` | Title + Adjective + Noun | `SirBraveEagle42` |
+| `adverbNoun` | Adverb + Noun | `EverWolf42` |
+| `prefixSuffix` | Prefix + Suffix | `NeoSeeker42` |
+| `verbNounSuffix` | Verb + Noun + Suffix | `RunningStormBringer42` |
+| `prefixNounSuffix` | Prefix + Noun + Suffix | `NeoStormBringer42` |
+| `titleNounSuffix` | Title + Noun + Suffix | `AgentStormBringer42` |
+| `prefixVerbNoun` | Prefix + Verb + Noun | `NeoRunningWolf42` |
+| `titleVerbNoun` | Title + Verb + Noun | `AgentRunningWolf42` |
 
 ## Casing Formats
 
@@ -153,6 +160,13 @@ With the default number range (`0`–`9999` = 10,000 numbers), each style has th
 | `prefixAdjectiveNoun` | 87 × 584 × 995 × 10K | **~506 billion** |
 | `titleAdjectiveNoun` | 92 × 584 × 995 × 10K | **~535 billion** |
 | `adjectiveNounSuffix` | 584 × 995 × 266 × 10K | **~1.5 trillion** |
+| `adverbNoun` | 83 × 995 × 10K | **~826 million** |
+| `prefixSuffix` | 87 × 266 × 10K | **~231 million** |
+| `verbNounSuffix` | 609 × 995 × 266 × 10K | **~1.6 trillion** |
+| `prefixNounSuffix` | 87 × 995 × 266 × 10K | **~230 billion** |
+| `titleNounSuffix` | 92 × 995 × 266 × 10K | **~243 billion** |
+| `prefixVerbNoun` | 87 × 609 × 995 × 10K | **~527 billion** |
+| `titleVerbNoun` | 92 × 609 × 995 × 10K | **~557 billion** |
 | `adjectiveVerbNoun` | 584 × 609 × 995 × 10K | **~3.5 trillion** |
 
 ### Collision probability

@@ -1,3 +1,9 @@
+## 1.6.0
+
+- Added 7 new username styles: `adverbNoun`, `prefixSuffix`, `verbNounSuffix`, `prefixNounSuffix`, `titleNounSuffix`, `prefixVerbNoun`, `titleVerbNoun`.
+- Now 19 styles total.
+- Updated combinatorial analysis in README.
+
 ## 1.5.0
 
 - Added 2 new word categories: prefixes (87) and titles (92).

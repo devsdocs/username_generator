@@ -45,6 +45,74 @@ enum UsernameStyle {
 
   /// `{Title}{Adjective}{Noun}{Number}` e.g. "SirBraveEagle42"
   titleAdjectiveNoun,
+
+  /// `{Adverb}{Noun}{Number}` e.g. "EverWolf42"
+  adverbNoun,
+
+  /// `{Prefix}{Suffix}{Number}` e.g. "NeoSeeker42"
+  prefixSuffix,
+
+  /// `{Verb}{Noun}{Suffix}{Number}` e.g. "RunningStormBringer42"
+  verbNounSuffix,
+
+  /// `{Prefix}{Noun}{Suffix}{Number}` e.g. "NeoStormBringer42"
+  prefixNounSuffix,
+
+  /// `{Title}{Noun}{Suffix}{Number}` e.g. "AgentStormBringer42"
+  titleNounSuffix,
+
+  /// `{Prefix}{Verb}{Noun}{Number}` e.g. "NeoRunningWolf42"
+  prefixVerbNoun,
+
+  /// `{Title}{Verb}{Noun}{Number}` e.g. "AgentRunningWolf42"
+  titleVerbNoun;
+
+  static List<UsernameStyle> get singleWordStyles => [nounOnly];
+
+  static List<UsernameStyle> get multiWordStyles => [
+    adjectiveNoun,
+    verbNoun,
+    adjectiveVerbNoun,
+    nounSuffix,
+    adjectiveNounSuffix,
+    adverbVerbNoun,
+    adverbAdjectiveNoun,
+    prefixNoun,
+    prefixAdjectiveNoun,
+    titleNoun,
+    titleAdjectiveNoun,
+    adverbNoun,
+    prefixSuffix,
+    verbNounSuffix,
+    prefixNounSuffix,
+    titleNounSuffix,
+    prefixVerbNoun,
+    titleVerbNoun,
+  ];
+
+  static List<UsernameStyle> get twoWordStyles => [
+    adjectiveNoun,
+    verbNoun,
+    nounSuffix,
+    prefixNoun,
+    titleNoun,
+    adverbNoun,
+    prefixSuffix,
+  ];
+
+  static List<UsernameStyle> get threeWordStyles => [
+    adjectiveVerbNoun,
+    adjectiveNounSuffix,
+    adverbVerbNoun,
+    adverbAdjectiveNoun,
+    prefixAdjectiveNoun,
+    titleAdjectiveNoun,
+    verbNounSuffix,
+    prefixNounSuffix,
+    titleNounSuffix,
+    prefixVerbNoun,
+    titleVerbNoun,
+  ];
 }
 
 /// The casing/separator style for generated usernames.
@@ -166,6 +234,33 @@ class UsernameGenerator {
       UsernameStyle.titleAdjectiveNoun => [
         _pick(titles),
         _pick(adjectives),
+        _pick(nouns),
+      ],
+      UsernameStyle.adverbNoun => [_pick(adverbs), _pick(nouns)],
+      UsernameStyle.prefixSuffix => [_pick(prefixes), _pick(suffixes)],
+      UsernameStyle.verbNounSuffix => [
+        _pick(verbs),
+        _pick(nouns),
+        _pick(suffixes),
+      ],
+      UsernameStyle.prefixNounSuffix => [
+        _pick(prefixes),
+        _pick(nouns),
+        _pick(suffixes),
+      ],
+      UsernameStyle.titleNounSuffix => [
+        _pick(titles),
+        _pick(nouns),
+        _pick(suffixes),
+      ],
+      UsernameStyle.prefixVerbNoun => [
+        _pick(prefixes),
+        _pick(verbs),
+        _pick(nouns),
+      ],
+      UsernameStyle.titleVerbNoun => [
+        _pick(titles),
+        _pick(verbs),
         _pick(nouns),
       ],
     };
