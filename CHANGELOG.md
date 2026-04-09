@@ -1,3 +1,7 @@
+## 1.4.1
+
+- README update
+
 ## 1.4.0
 
 - Initial release.
