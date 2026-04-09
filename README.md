@@ -15,7 +15,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  username_generator: ^1.0.0
+  username_generator: ^1.4.0
 ```
 
 Then run:
@@ -27,7 +27,7 @@ dart pub get
 ## Usage
 
 ```dart
-import 'package:username_generator/username_generator.dart';
+import 'package:simple_username_generator/simple_username_generator.dart';
 
 void main() {
   // Default: AdjectiveNoun + PascalCase

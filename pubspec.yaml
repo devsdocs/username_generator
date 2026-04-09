@@ -1,4 +1,4 @@
-name: username_generator
+name: simple_username_generator
 description: >-
   A lightweight, zero-dependency Dart package that generates random usernames
   by combining adjectives, verbs, adverbs, nouns, and suffixes with a numeric
