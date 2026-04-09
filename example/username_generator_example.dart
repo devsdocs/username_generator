@@ -24,6 +24,14 @@ void main() {
   final compoundGen = UsernameGenerator(style: UsernameStyle.nounSuffix);
   print(compoundGen.generate()); // e.g. StormBringer42
 
+  // Sci-fi prefix style
+  final scifiGen = UsernameGenerator(style: UsernameStyle.prefixNoun);
+  print(scifiGen.generate()); // e.g. NeoPhoenix42
+
+  // Title + Noun
+  final titleGen = UsernameGenerator(style: UsernameStyle.titleNoun);
+  print(titleGen.generate()); // e.g. AgentWolf99
+
   // Adverb + Verb + Noun
   final adverbGen = UsernameGenerator(style: UsernameStyle.adverbVerbNoun);
   print(adverbGen.generate()); // e.g. EverBurningPhoenix7

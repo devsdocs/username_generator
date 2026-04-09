@@ -1,9 +1,9 @@
 # simple_username_generator
 
-A lightweight, zero-dependency Dart package that generates random usernames by combining words from five categories — **adjectives**, **verbs**, **adverbs**, **nouns**, and **suffixes** — with a numeric suffix.
+A lightweight, zero-dependency Dart package that generates random usernames by combining words from seven categories — **adjectives**, **verbs**, **adverbs**, **nouns**, **suffixes**, **prefixes**, and **titles** — with a numeric suffix.
 
-- **2,500+ deduplicated words** across 5 categories
-- **8 username styles** (e.g. `AdjectiveNoun`, `NounSuffix`, `AdverbVerbNoun`)
+- **2,700+ deduplicated words** across 7 categories
+- **12 username styles** (e.g. `AdjectiveNoun`, `NounSuffix`, `PrefixNoun`, `TitleNoun`)
 - **4 casing formats** (PascalCase, lowercase, snake_case, kebab-case)
 - **Batch generation** with uniqueness guarantee
 - **Seeded output** for reproducibility
@@ -15,7 +15,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  simple_username_generator: ^1.4.0
+  simple_username_generator: ^1.5.0
 ```
 
 Then run:
@@ -47,6 +47,18 @@ void main() {
   );
   print(fantasyGen.generate()); // StormBringer42
 
+  // Sci-fi prefix style
+  final scifiGen = UsernameGenerator(
+    style: UsernameStyle.prefixNoun,
+  );
+  print(scifiGen.generate()); // NeoPhoenix42
+
+  // Title + Noun
+  final titleGen = UsernameGenerator(
+    style: UsernameStyle.titleNoun,
+  );
+  print(titleGen.generate()); // AgentWolf99
+
   // Batch of 10 unique usernames
   final batch = gen.generateBatch(10);
   batch.forEach(print);
@@ -69,6 +81,10 @@ void main() {
 | `adjectiveNounSuffix` | Adjective + Noun + Suffix | `DarkStormBringer42` |
 | `adverbVerbNoun` | Adverb + Verb + Noun | `EverBurningPhoenix7` |
 | `adverbAdjectiveNoun` | Adverb + Adjective + Noun | `TrulyBraveWolf99` |
+| `prefixNoun` | Prefix + Noun | `NeoPhoenix42` |
+| `prefixAdjectiveNoun` | Prefix + Adjective + Noun | `ArchDarkTiger7` |
+| `titleNoun` | Title + Noun | `AgentWolf99` |
+| `titleAdjectiveNoun` | Title + Adjective + Noun | `SirBraveEagle42` |
 
 ## Casing Formats
 
@@ -115,8 +131,55 @@ UsernameGenerator({
 | Verbs | 609 | Running, Blazing, Forging |
 | Adverbs | 83 | Ever, Truly, Deeply, Boldly |
 | Suffixes | 266 | Bringer, Seeker, Born, Blade |
+| Prefixes | 87 | Neo, Proto, Arch, Sigma |
+| Titles | 92 | Agent, Sir, Colonel, Archon |
 
-All words are cross-checked for duplicates across categories (adjectives, nouns, verbs, adverbs are fully disjoint; suffixes are positional and may share words with nouns by design).
+All words are cross-checked and deduplicated across categories. Adjectives, nouns, verbs, adverbs, prefixes, and titles are fully disjoint. Suffixes are positional and may share words with nouns by design (they occupy different slots in the pattern).
+
+## Unique Combinations & Collision Risk
+
+With the default number range (`0`–`9999` = 10,000 numbers), each style has the following total unique username space:
+
+| Style | Formula | Unique Usernames |
+|---|---|---|
+| `nounOnly` | 995 × 10K | **~10 million** |
+| `prefixNoun` | 87 × 995 × 10K | **~866 million** |
+| `titleNoun` | 92 × 995 × 10K | **~915 million** |
+| `nounSuffix` | 995 × 266 × 10K | **~2.6 billion** |
+| `adjectiveNoun` | 584 × 995 × 10K | **~5.8 billion** |
+| `verbNoun` | 609 × 995 × 10K | **~6.1 billion** |
+| `adverbAdjectiveNoun` | 83 × 584 × 995 × 10K | **~482 billion** |
+| `adverbVerbNoun` | 83 × 609 × 995 × 10K | **~503 billion** |
+| `prefixAdjectiveNoun` | 87 × 584 × 995 × 10K | **~506 billion** |
+| `titleAdjectiveNoun` | 92 × 584 × 995 × 10K | **~535 billion** |
+| `adjectiveNounSuffix` | 584 × 995 × 266 × 10K | **~1.5 trillion** |
+| `adjectiveVerbNoun` | 584 × 609 × 995 × 10K | **~3.5 trillion** |
+
+### Collision probability
+
+Using the [birthday paradox](https://en.wikipedia.org/wiki/Birthday_problem) approximation $P \approx 1 - e^{-n^2 / 2N}$ where $n$ = number of generated usernames and $N$ = unique combinations:
+
+| Users | `nounOnly` | `adjectiveNoun` | `adjectiveVerbNoun` |
+|---|---|---|---|
+| 1,000 | 4.9% | < 0.01% | < 0.01% |
+| 10,000 | ~100% | 0.86% | < 0.01% |
+| 50,000 | ~100% | 19.3% | < 0.01% |
+| 100,000 | ~100% | 57.7% | < 0.01% |
+| 1,000,000 | ~100% | ~100% | 0.01% |
+
+**50% collision thresholds** (the number of users where there's a 50/50 chance of at least one duplicate):
+
+| Style | 50% Collision At |
+|---|---|
+| `nounOnly` | ~3,700 users |
+| `prefixNoun` | ~34,600 users |
+| `titleNoun` | ~35,600 users |
+| `adjectiveNoun` | ~89,800 users |
+| `verbNoun` | ~91,700 users |
+| `adverbVerbNoun` | ~835,000 users |
+| `adjectiveVerbNoun` | ~2,215,000 users |
+
+> **Tip:** For applications with many users, use a 3-word style (`adjectiveVerbNoun`, `adverbVerbNoun`) or increase `maxNumber` to push the collision threshold higher.
 
 ## License
 

@@ -112,5 +112,48 @@ void main() {
       final username = gen.generate();
       expect(username, isNotEmpty);
     });
+
+    test('prefixNoun style works', () {
+      final gen = UsernameGenerator(seed: 1, style: UsernameStyle.prefixNoun);
+      final username = gen.generate();
+      expect(username, isNotEmpty);
+    });
+
+    test('prefixAdjectiveNoun style works', () {
+      final gen = UsernameGenerator(
+        seed: 1,
+        style: UsernameStyle.prefixAdjectiveNoun,
+      );
+      final username = gen.generate();
+      expect(username, isNotEmpty);
+    });
+
+    test('titleNoun style works', () {
+      final gen = UsernameGenerator(seed: 1, style: UsernameStyle.titleNoun);
+      final username = gen.generate();
+      expect(username, isNotEmpty);
+    });
+
+    test('titleAdjectiveNoun style works', () {
+      final gen = UsernameGenerator(
+        seed: 1,
+        style: UsernameStyle.titleAdjectiveNoun,
+      );
+      final username = gen.generate();
+      expect(username, isNotEmpty);
+    });
+
+    test('all styles produce valid output', () {
+      for (final style in UsernameStyle.values) {
+        final gen = UsernameGenerator(seed: 1, style: style);
+        final username = gen.generate();
+        expect(username, isNotEmpty, reason: '${style.name} produced empty');
+        expect(
+          username,
+          matches(RegExp(r'\d+')),
+          reason: '${style.name} missing number',
+        );
+      }
+    });
   });
 }

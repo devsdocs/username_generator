@@ -3,7 +3,9 @@ import 'dart:math';
 import 'words/adjectives.dart';
 import 'words/adverbs.dart';
 import 'words/nouns.dart';
+import 'words/prefixes.dart';
 import 'words/suffixes.dart';
+import 'words/titles.dart';
 import 'words/verbs.dart';
 
 /// The pattern used to construct a username.
@@ -31,6 +33,18 @@ enum UsernameStyle {
 
   /// `{Adverb}{Adjective}{Noun}{Number}` e.g. "TrulyBraveWolf99"
   adverbAdjectiveNoun,
+
+  /// `{Prefix}{Noun}{Number}` e.g. "NeoPhoenix42"
+  prefixNoun,
+
+  /// `{Prefix}{Adjective}{Noun}{Number}` e.g. "ArchDarkTiger7"
+  prefixAdjectiveNoun,
+
+  /// `{Title}{Noun}{Number}` e.g. "AgentWolf99"
+  titleNoun,
+
+  /// `{Title}{Adjective}{Noun}{Number}` e.g. "SirBraveEagle42"
+  titleAdjectiveNoun,
 }
 
 /// The casing/separator style for generated usernames.
@@ -49,7 +63,8 @@ enum UsernameCasing {
 }
 
 /// A generator that creates random usernames by combining words from
-/// five categories (adjectives, adverbs, verbs, nouns, suffixes) with a numeric suffix.
+/// seven categories (adjectives, adverbs, verbs, nouns, suffixes, prefixes,
+/// titles) with a numeric suffix.
 class UsernameGenerator {
   /// Minimum value for the numeric suffix (inclusive).
   final int minNumber;
@@ -138,6 +153,18 @@ class UsernameGenerator {
       ],
       UsernameStyle.adverbAdjectiveNoun => [
         _pick(adverbs),
+        _pick(adjectives),
+        _pick(nouns),
+      ],
+      UsernameStyle.prefixNoun => [_pick(prefixes), _pick(nouns)],
+      UsernameStyle.prefixAdjectiveNoun => [
+        _pick(prefixes),
+        _pick(adjectives),
+        _pick(nouns),
+      ],
+      UsernameStyle.titleNoun => [_pick(titles), _pick(nouns)],
+      UsernameStyle.titleAdjectiveNoun => [
+        _pick(titles),
         _pick(adjectives),
         _pick(nouns),
       ],

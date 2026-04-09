@@ -1,3 +1,10 @@
+## 1.5.0
+
+- Added 2 new word categories: prefixes (87) and titles (92).
+- Added 4 new username styles: `prefixNoun`, `prefixAdjectiveNoun`, `titleNoun`, `titleAdjectiveNoun`.
+- Cross-checked and deduplicated all 7 categories (2,716 total words).
+- Added combinatorial space and collision risk analysis to README.
+
 ## 1.4.1
 
 - README update
