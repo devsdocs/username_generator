@@ -146,7 +146,11 @@ class UsernameGenerator {
   /// The casing/separator style for the output.
   final UsernameCasing casing;
 
+  /// Random instance used for generating random numbers. You can provide a seeded Random for reproducible results.
   final Random _random;
+
+  /// Whether to include a numeric suffix in the generated username. If `false`, the generator will produce usernames without numbers, regardless of the `minNumber` and `maxNumber` settings. (default: `true`)
+  final bool includeNumber;
 
   /// Creates a [UsernameGenerator].
   ///
@@ -160,13 +164,14 @@ class UsernameGenerator {
     this.casing = UsernameCasing.pascalCase,
     this.minNumber = 0,
     this.maxNumber = 9999,
+    this.includeNumber = true,
     Random? random,
   }) : _random = random ?? Random();
 
   /// Generates a single random username.
   String generate() {
     final parts = _buildParts();
-    final number = _randomNumber();
+    final number = includeNumber ? _randomNumber() : null;
     return _format(parts, number);
   }
 
@@ -270,8 +275,8 @@ class UsernameGenerator {
 
   int _randomNumber() => minNumber + _random.nextInt(maxNumber - minNumber + 1);
 
-  String _format(List<String> words, int number) {
-    final numberStr = number.toString();
+  String _format(List<String> words, [int? number]) {
+    final numberStr = number != null ? number.toString() : '';
 
     return switch (casing) {
       UsernameCasing.pascalCase => '${words.map(_capitalize).join()}$numberStr',

@@ -4,7 +4,7 @@ description: >-
   by combining adjectives, verbs, adverbs, nouns, suffixes, prefixes, and
   titles with a numeric suffix. Supports 19 styles, 4 casing formats, batch
   generation, and seeded reproducibility.
-version: 1.7.0
+version: 1.7.1
 repository: https://github.com/devsdocs/username_generator
 homepage: https://github.com/devsdocs/username_generator
 issue_tracker: https://github.com/devsdocs/username_generator/issues

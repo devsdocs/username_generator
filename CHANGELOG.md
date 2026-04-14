@@ -1,3 +1,7 @@
+## 1.7.1
+
+- Exposing `includeNumber` flag for optional number in username
+
 ## 1.7.0
 
 - Exposing `random` for custom `Random` instead of `seed`
