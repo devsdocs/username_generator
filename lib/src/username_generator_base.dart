@@ -283,9 +283,9 @@ class UsernameGenerator {
       UsernameCasing.lowerCase =>
         '${words.map((w) => w.toLowerCase()).join()}$numberStr',
       UsernameCasing.snakeCase =>
-        '${words.map((w) => w.toLowerCase()).join('_')}_$numberStr',
+        '${words.map((w) => w.toLowerCase()).join('_')}${number != null ? '_$numberStr' : ''}',
       UsernameCasing.kebabCase =>
-        '${words.map((w) => w.toLowerCase()).join('-')}-$numberStr',
+        '${words.map((w) => w.toLowerCase()).join('-')}${number != null ? "-$numberStr" : ''}',
     };
   }
 
