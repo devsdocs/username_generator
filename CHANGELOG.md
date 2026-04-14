@@ -1,4 +1,8 @@
-## 1.7.1
+## 1.7.2
+
+- Bug fix
+
+## 1.7.1 
 
 - Exposing `includeNumber` flag for optional number in username
 
