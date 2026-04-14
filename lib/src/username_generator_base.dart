@@ -154,14 +154,14 @@ class UsernameGenerator {
   /// - [casing] determines the output format (default: [UsernameCasing.pascalCase]).
   /// - [minNumber] is the inclusive lower bound for the numeric suffix (default: 0).
   /// - [maxNumber] is the inclusive upper bound for the numeric suffix (default: 9999).
-  /// - [seed] optional seed for reproducible output.
+  /// - [random] optional Random instance, you can provide seeded Random for reproducible results (default: Random()).
   UsernameGenerator({
     this.style = UsernameStyle.adjectiveNoun,
     this.casing = UsernameCasing.pascalCase,
     this.minNumber = 0,
     this.maxNumber = 9999,
-    int? seed,
-  }) : _random = seed != null ? Random(seed) : Random();
+    Random? random,
+  }) : _random = random ?? Random();
 
   /// Generates a single random username.
   String generate() {

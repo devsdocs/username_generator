@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:simple_username_generator/simple_username_generator.dart';
 
 void main() {
@@ -43,6 +45,6 @@ void main() {
   }
 
   // Reproducible output with a seed
-  final seeded = UsernameGenerator(seed: 42);
+  final seeded = UsernameGenerator(random: Random(42));
   print(seeded.generate()); // Always the same for seed 42
 }

@@ -1,28 +1,34 @@
+import 'dart:math';
+
 import 'package:simple_username_generator/simple_username_generator.dart';
 import 'package:test/test.dart';
 
 void main() {
   group('UsernameGenerator', () {
     test('generates a non-empty string', () {
-      final gen = UsernameGenerator(seed: 1);
+      final gen = UsernameGenerator(random: Random(1));
       final username = gen.generate();
       expect(username, isNotEmpty);
     });
 
     test('seeded generator produces deterministic output', () {
-      final a = UsernameGenerator(seed: 42).generate();
-      final b = UsernameGenerator(seed: 42).generate();
+      final a = UsernameGenerator(random: Random(42)).generate();
+      final b = UsernameGenerator(random: Random(42)).generate();
       expect(a, equals(b));
     });
 
     test('generated username contains a number', () {
-      final gen = UsernameGenerator(seed: 1);
+      final gen = UsernameGenerator(random: Random(1));
       final username = gen.generate();
       expect(username, matches(RegExp(r'\d+')));
     });
 
     test('number stays within configured range', () {
-      final gen = UsernameGenerator(seed: 1, minNumber: 100, maxNumber: 200);
+      final gen = UsernameGenerator(
+        random: Random(1),
+        minNumber: 100,
+        maxNumber: 200,
+      );
       for (var i = 0; i < 100; i++) {
         final username = gen.generate();
         final match = RegExp(r'(\d+)$').firstMatch(username);
@@ -34,19 +40,28 @@ void main() {
     });
 
     test('snake_case format uses underscores', () {
-      final gen = UsernameGenerator(seed: 1, casing: UsernameCasing.snakeCase);
+      final gen = UsernameGenerator(
+        random: Random(1),
+        casing: UsernameCasing.snakeCase,
+      );
       final username = gen.generate();
       expect(username, matches(RegExp(r'^[a-z]+(_[a-z0-9]+)+$')));
     });
 
     test('kebab-case format uses hyphens', () {
-      final gen = UsernameGenerator(seed: 1, casing: UsernameCasing.kebabCase);
+      final gen = UsernameGenerator(
+        random: Random(1),
+        casing: UsernameCasing.kebabCase,
+      );
       final username = gen.generate();
       expect(username, matches(RegExp(r'^[a-z]+(-[a-z0-9]+)+$')));
     });
 
     test('lowerCase format has no separators or uppercase', () {
-      final gen = UsernameGenerator(seed: 1, casing: UsernameCasing.lowerCase);
+      final gen = UsernameGenerator(
+        random: Random(1),
+        casing: UsernameCasing.lowerCase,
+      );
       final username = gen.generate();
       expect(username, equals(username.toLowerCase()));
       expect(username, isNot(contains('_')));
@@ -54,26 +69,29 @@ void main() {
     });
 
     test('generateBatch returns requested count', () {
-      final gen = UsernameGenerator(seed: 1);
+      final gen = UsernameGenerator(random: Random(1));
       final batch = gen.generateBatch(10);
       expect(batch.length, equals(10));
     });
 
     test('generateBatch with unique=true returns distinct values', () {
-      final gen = UsernameGenerator(seed: 1);
+      final gen = UsernameGenerator(random: Random(1));
       final batch = gen.generateBatch(50);
       expect(batch.toSet().length, equals(50));
     });
 
     test('nounOnly style produces shorter usernames', () {
-      final gen = UsernameGenerator(seed: 1, style: UsernameStyle.nounOnly);
+      final gen = UsernameGenerator(
+        random: Random(1),
+        style: UsernameStyle.nounOnly,
+      );
       final username = gen.generate();
       expect(username, isNotEmpty);
     });
 
     test('adjectiveVerbNoun style works', () {
       final gen = UsernameGenerator(
-        seed: 1,
+        random: Random(1),
         style: UsernameStyle.adjectiveVerbNoun,
       );
       final username = gen.generate();
@@ -81,14 +99,17 @@ void main() {
     });
 
     test('nounSuffix style works', () {
-      final gen = UsernameGenerator(seed: 1, style: UsernameStyle.nounSuffix);
+      final gen = UsernameGenerator(
+        random: Random(1),
+        style: UsernameStyle.nounSuffix,
+      );
       final username = gen.generate();
       expect(username, isNotEmpty);
     });
 
     test('adjectiveNounSuffix style works', () {
       final gen = UsernameGenerator(
-        seed: 1,
+        random: Random(1),
         style: UsernameStyle.adjectiveNounSuffix,
       );
       final username = gen.generate();
@@ -97,7 +118,7 @@ void main() {
 
     test('adverbVerbNoun style works', () {
       final gen = UsernameGenerator(
-        seed: 1,
+        random: Random(1),
         style: UsernameStyle.adverbVerbNoun,
       );
       final username = gen.generate();
@@ -106,7 +127,7 @@ void main() {
 
     test('adverbAdjectiveNoun style works', () {
       final gen = UsernameGenerator(
-        seed: 1,
+        random: Random(1),
         style: UsernameStyle.adverbAdjectiveNoun,
       );
       final username = gen.generate();
@@ -114,14 +135,17 @@ void main() {
     });
 
     test('prefixNoun style works', () {
-      final gen = UsernameGenerator(seed: 1, style: UsernameStyle.prefixNoun);
+      final gen = UsernameGenerator(
+        random: Random(1),
+        style: UsernameStyle.prefixNoun,
+      );
       final username = gen.generate();
       expect(username, isNotEmpty);
     });
 
     test('prefixAdjectiveNoun style works', () {
       final gen = UsernameGenerator(
-        seed: 1,
+        random: Random(1),
         style: UsernameStyle.prefixAdjectiveNoun,
       );
       final username = gen.generate();
@@ -129,14 +153,17 @@ void main() {
     });
 
     test('titleNoun style works', () {
-      final gen = UsernameGenerator(seed: 1, style: UsernameStyle.titleNoun);
+      final gen = UsernameGenerator(
+        random: Random(1),
+        style: UsernameStyle.titleNoun,
+      );
       final username = gen.generate();
       expect(username, isNotEmpty);
     });
 
     test('titleAdjectiveNoun style works', () {
       final gen = UsernameGenerator(
-        seed: 1,
+        random: Random(1),
         style: UsernameStyle.titleAdjectiveNoun,
       );
       final username = gen.generate();
@@ -145,7 +172,7 @@ void main() {
 
     test('all styles produce valid output', () {
       for (final style in UsernameStyle.values) {
-        final gen = UsernameGenerator(seed: 1, style: style);
+        final gen = UsernameGenerator(random: Random(1), style: style);
         final username = gen.generate();
         expect(username, isNotEmpty, reason: '${style.name} produced empty');
         expect(

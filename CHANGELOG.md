@@ -1,3 +1,7 @@
+## 1.7.0
+
+- Exposing `random` for custom `Random` instead of `seed`
+
 ## 1.6.0
 
 - Added 7 new username styles: `adverbNoun`, `prefixSuffix`, `verbNounSuffix`, `prefixNounSuffix`, `titleNounSuffix`, `prefixVerbNoun`, `titleVerbNoun`.
