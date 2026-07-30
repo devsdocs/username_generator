@@ -1,5 +1,7 @@
 # simple_username_generator
 
+[![pub package](https://img.shields.io/pub/v/simple_username_generator)](https://pub.dev/packages/simple_username_generator)
+[![codecov](https://codecov.io/gh/devsdocs/username_generator/branch/main/graph/badge.svg)](https://codecov.io/gh/devsdocs/username_generator)
 A lightweight, zero-dependency Dart package that generates random usernames by combining words from seven categories — **adjectives**, **verbs**, **adverbs**, **nouns**, **suffixes**, **prefixes**, and **titles** — with a numeric suffix.
 
 - **2,700+ deduplicated words** across 7 categories
